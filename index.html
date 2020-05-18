@@ -23,7 +23,8 @@
                 display: grid;
                 grid-template-columns: 25ch 3fr 20ch;
                 grid-template-areas: "exp-company exp-roles exp-time"
-                                     "exp-description exp-description exp-description"; 
+                                     "exp-description exp-description exp-description";
+                margin-bottom: 2ch;
             }
 
             .exp-roles {
@@ -46,6 +47,8 @@
             }
 
             .subsection {
+                padding-top: 3ch;
+                padding-bottom: 1ch;
                 text-align: center;
             }
 
@@ -57,19 +60,14 @@
                 content: " ----";
             }
 
-            section {
-                margin-top: 6ch;
-                margin-bottom: 6ch;
-            }
-
             noscript {
                 display: inline;
             }
         </style>
-            
+
         <script>
             let step = "|/-\\";
-            
+
             let counter = function* (n) {
                 let x = 0;
 
@@ -81,14 +79,14 @@
 
             let spinner = (step, el, i) => setInterval(() => (el.innerText = step[i.next().value]), 175);
 
-            
+
             document.addEventListener('DOMContentLoaded', () => {
 
                 document.querySelectorAll('[data-ongoing]').forEach(target => {
                     let el = document.createElement('span');
                     el.style.fontWeight = 'bold';
                     el.style.fontStyle = 'normal';
-                
+
                     target.appendChild(el);
 
                     spinner(step, el, counter(step.length));
@@ -119,6 +117,7 @@
                 </nav>
             </div>
         </div>
+
         <main class="container">
             <section id="summary">
                 <header>
@@ -130,6 +129,8 @@
                 <p>These are the qualities I bring to my work as a software engineer and a leader, covering a range of skills from full stackdevelopment in Rails, to microservice architecture in Java and Go, devops with Terraform and AWS, and the ability to co-ordinate a team around a project.</p>
             </section>
 
+            <hr>
+
             <section id="experience">
                 <header>
                     <h2 class="subsection">Experience</h2>
@@ -140,7 +141,7 @@
                         <h3><a href="https://babylonhealth.com">Babylon Health</a></h3>
                     </div>
                     <div class="exp-roles">
-                        <span class="exp-role">Senior Software Engineer</span>, 
+                        <span class="exp-role">Senior Software Engineer</span>,
                         <span class="exp-role">Squad Lead</span>
                     </div>
                     <div class="exp-time" data-ongoing>
@@ -150,8 +151,6 @@
                         <p>&hellip;</p>
                     </div>
                 </div>
-
-                <hr>
 
                 <div class="experience-block">
                     <div class="exp-company">
@@ -168,8 +167,6 @@
                     </div>
                 </div>
 
-                <hr>
-
                 <div class="experience-block">
                     <div class="exp-company">
                         <h3>Bobtrade</h3>
@@ -184,8 +181,6 @@
                         <p>Development of a machine-learning based e-commerce platorm for the construction industry, consuming a REST-based API with a single page Javascript app built using React, Redux, server side rendering and Webpack.</p>
                     </div>
                 </div>
-
-                <hr>
 
                 <div class="experience-block">
                     <div class="exp-company">
@@ -204,8 +199,6 @@
                         <p>Ownership of the infrastructure used to host and deploy Friday, including using Terraform to manage a Docker-based deployment using ECS, S3 for static site hosting, Elasticsearch, RDS, and CloudFront for the CDN distribution before transitioning to Heroku to reduce overhead.</p>
                     </div>
                 </div>
-
-                <hr>
 
                 <div class="experience-block">
                     <div class="exp-company">
@@ -227,8 +220,6 @@
                     </div>
                 </div>
 
-                <hr>
-
                 <div class="experience-block">
                     <div class="exp-company">
                         <h3>Meet &amp; Jam</h3>
@@ -243,8 +234,6 @@
                         <p>testings</p>
                     </div>
                 </div>
-
-                <hr>
 
                 <div class="experience-block">
                     <div class="exp-company">
@@ -264,14 +253,12 @@
                     </div>
                 </div>
 
-                <hr>
-
                 <div class="experience-block">
                     <div class="exp-company">
                         <h3><a href="https://thoughtbot.com/london">New Bamboo</a></h3>
                     </div>
                     <div class="exp-roles">
-                        <span class="exp-role">Software Developer</span>, 
+                        <span class="exp-role">Software Developer</span>,
                         <span class="exp-role">Scrum Master</span>
                     </div>
                     <div class="exp-time">
@@ -284,6 +271,8 @@
                     </div>
                 </div>
             </section>
+
+            <hr>
 
             <section id="references">
                 <header>
