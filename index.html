@@ -45,6 +45,23 @@
                 text-align: right;
             }
 
+            .subsection {
+                text-align: center;
+            }
+
+            .subsection::before {
+                content: "---- ";
+            }
+
+            .subsection::after {
+                content: " ----";
+            }
+
+            section {
+                margin-top: 6ch;
+                margin-bottom: 6ch;
+            }
+
             noscript {
                 display: inline;
             }
@@ -105,7 +122,7 @@
         <main class="container">
             <section id="summary">
                 <header>
-                    <h2>Summary</h1>
+                    <h2 class="subsection">Summary</h2>
                 </header>
 
                 <p>I value happiness and integrity above all else in the work place and believe these two things to be at thecore of many other desirable qualities: happiness inspires motivation, productivity, quality, commitment, and the acknowledgement that it’s okay to face failure on the way to achieving success.</p>
@@ -115,7 +132,7 @@
 
             <section id="experience">
                 <header>
-                    <h2>Experience</h1>
+                    <h2 class="subsection">Experience</h2>
                 </header>
 
                 <div class="experience-block">
@@ -270,7 +287,7 @@
 
             <section id="references">
                 <header>
-                    <h1>References</h1>
+                    <h2 class="subsection">References</h2>
                 </header>
             </section>
         </main>
