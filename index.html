@@ -45,16 +45,21 @@
                     yield x;
                     x = (x + 1) % n;
                 } while(true);
-            }(step.length);
+            };
 
-            let spinner = (step, el) => setInterval(() => (el.innerText = step[counter.next().value]), 175);
+            let spinner = (step, el, i) => setInterval(() => (el.innerText = step[i.next().value]), 175);
 
             
             document.addEventListener('DOMContentLoaded', () => {
-                let el = document.createElement('span');
-                el.style.fontWeight = 'bold';
-                document.querySelector('[data-ongoing]').appendChild(el);
-                spinner(step, el)
+
+                document.querySelectorAll('[data-ongoing]').forEach(target => {
+                    let el = document.createElement('span');
+                    el.style.fontWeight = 'bold';
+                
+                    target.appendChild(el);
+
+                    spinner(step, el, counter(step.length));
+                });
             });
         </script>
 
