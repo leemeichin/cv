@@ -19,6 +19,17 @@
                 }
             }
 
+            @media print {
+                .subsection-end {
+                    display: none;
+                }
+
+                .meta {
+                    display: block;
+                    margin-top: 5ch;
+                }
+            }
+
             .experience-block {
                 display: grid;
                 grid-template-columns: 25ch 3fr 20ch;
@@ -61,6 +72,7 @@
             }
 
             .subsection-end {
+                margin-top: 6ch;
                 background-color: var(--font-color);
             }
             .subsection-end > small {
