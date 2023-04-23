@@ -1,352 +1,419 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.1/dist/terminal.min.css" />
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/terminal.css@0.7.1/dist/terminal.min.css"
+    />
     <style>
-        @media screen and (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #222225;
-                --font-color: #e8e9ed;
-                --invert-font-color: #222225;
-                --secondary-color: #a3abba;
-                --tertiary-color: #a3abba;
-                --primary-color: #62c4ff;
-                --error-color: #ff3c74;
-                --progress-bar-background: #3f3f44;
-                --progress-bar-fill: #62c4ff;
-                --code-bg-color: #3f3f44;
-            }
+      @media screen and (prefers-color-scheme: dark) {
+        :root {
+          --background-color: #222225;
+          --font-color: #e8e9ed;
+          --invert-font-color: #222225;
+          --secondary-color: #a3abba;
+          --tertiary-color: #a3abba;
+          --primary-color: #62c4ff;
+          --error-color: #ff3c74;
+          --progress-bar-background: #3f3f44;
+          --progress-bar-fill: #62c4ff;
+          --code-bg-color: #3f3f44;
         }
+      }
 
-        @media print {
-            .subsection-end {
-                display: none;
-            }
-
-            .meta {
-                display: block;
-                margin-top: 5ch;
-            }
-        }
-
-        .experience-block {
-            display: grid;
-            grid-template-columns: 25ch 3fr 20ch;
-            grid-template-areas: "exp-company exp-roles exp-time"
-                "exp-description exp-description exp-description";
-            margin-bottom: 2ch;
-        }
-
-        .exp-roles {
-            grid-area: exp-roles;
-            text-align: left;
-        }
-
-        .exp-role {
-            text-decoration: underline;
-        }
-
-        .exp-description {
-            grid-area: exp-description;
-        }
-
-        .exp-time {
-            grid-area: exp-time;
-            font-style: italic;
-            text-align: right;
-        }
-
-        .subsection {
-            padding-top: 3ch;
-            padding-bottom: 1ch;
-            text-align: center;
-        }
-
-        .subsection::before {
-            content: "---- ";
-        }
-
-        .subsection::after {
-            content: " ----";
-        }
-
+      @media print {
         .subsection-end {
-            margin-top: 6ch;
-            background-color: var(--font-color);
-        }
-
-        .subsection-end>small {
-            color: var(--invert-font-color);
-        }
-
-        noscript {
-            display: inline;
+          display: none;
         }
 
         .meta {
-            padding-bottom: 2ch;
+          display: block;
+          margin-top: 5ch;
         }
+      }
+
+      .experience-block {
+        display: grid;
+        grid-template-columns: 25ch 3fr 20ch;
+        grid-template-areas:
+          "exp-company exp-roles exp-time"
+          "exp-description exp-description exp-description";
+        margin-bottom: 2ch;
+      }
+
+      .exp-roles {
+        grid-area: exp-roles;
+        text-align: left;
+      }
+
+      .exp-role {
+        text-decoration: underline;
+      }
+
+      .exp-description {
+        grid-area: exp-description;
+      }
+
+      .exp-time {
+        grid-area: exp-time;
+        font-style: italic;
+        text-align: right;
+      }
+
+      .subsection {
+        padding-top: 3ch;
+        padding-bottom: 1ch;
+        text-align: center;
+      }
+
+      .subsection::before {
+        content: "---- ";
+      }
+
+      .subsection::after {
+        content: " ----";
+      }
+
+      .subsection-end {
+        margin-top: 6ch;
+        background-color: var(--font-color);
+      }
+
+      .subsection-end > small {
+        color: var(--invert-font-color);
+      }
+
+      noscript {
+        display: inline;
+      }
+
+      .meta {
+        padding-bottom: 2ch;
+      }
     </style>
 
     <script>
-        let step = "|/-\\";
+      let step = "|/-\\";
 
-        let counter = function* (n) {
-            let x = 0;
+      let counter = function* (n) {
+        let x = 0;
 
-            do {
-                yield x;
-                x = (x + 1) % n;
-            } while (true);
-        };
+        do {
+          yield x;
+          x = (x + 1) % n;
+        } while (true);
+      };
 
-        let spinner = (step, el, i) => setInterval(() => (el.innerText = step[i.next().value]), 175);
+      let spinner = (step, el, i) =>
+        setInterval(() => (el.innerText = step[i.next().value]), 175);
 
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("[data-ongoing]").forEach((target) => {
+          let el = document.createElement("span");
+          el.style.fontWeight = "bold";
+          el.style.fontStyle = "normal";
 
-        document.addEventListener('DOMContentLoaded', () => {
+          target.appendChild(el);
 
-            document.querySelectorAll('[data-ongoing]').forEach(target => {
-                let el = document.createElement('span');
-                el.style.fontWeight = 'bold';
-                el.style.fontStyle = 'normal';
-
-                target.appendChild(el);
-
-                spinner(step, el, counter(step.length));
-            });
+          spinner(step, el, counter(step.length));
         });
+      });
     </script>
 
-    <title>CV | mrlee.dev</title>
-</head>
+    <title>CV | leemeichin.com</title>
+  </head>
 
-<body class="terminal">
+  <body class="terminal">
     <div class="container">
-        <div class="terminal-nav">
-            <header class="terminal-logo">
-                <div class="logo terminal-prompt">
-                    <a class="no-style">
-                        Lee Meichin
-                    </a>
-                    <span>Senior Software Engineer / Tech Lead</span>
-                </div>
-            </header>
-            <nav class="terminal-menu">
-                <ul vocab="https://schema.org/" typeof="BreadcrumbList">
-                    <li><a href="#summary">Summary</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#references">References</a></li>
-                    <li><a href="https://www.mrlee.dev"><em><u>Blog</u></em></a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="terminal-nav">
+        <header class="terminal-logo">
+          <div class="logo terminal-prompt">
+            <a class="no-style"> Lee Meichin </a>
+            <span>Staff Software Engineer / Tech Lead</span>
+          </div>
+        </header>
+        <nav class="terminal-menu">
+          <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#references">References</a></li>
+            <li>
+              <a href="https://www.mrlee.dev"
+                ><em><u>Blog</u></em></a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
 
     <main class="container">
-        <section id="summary">
-            <header>
-                <h2 class="subsection">Summary</h2>
-            </header>
+      <section id="summary">
+        <header>
+          <h2 class="subsection">Summary</h2>
+        </header>
 
-            <p>I value compassion, empathy and integrity above all else in the work place and believe these two things
-                to be at thecore of many other desirable qualities: happiness inspires motivation, productivity,
-                quality, commitment, and the acknowledgement that it's okay to face failure on the way to achieving
-                success.</p>
+        <p>
+          I value compassion, empathy and integrity above all else in the work
+          place and believe these two things to be at the core of many other
+          desirable qualities: happiness inspires motivation, productivity,
+          quality, commitment, and the acknowledgement that it's okay to face
+          failure on the way to achieving success. Over thirteen years of work I
+          have not found a better way to rephrase that.
+        </p>
 
-            <p>These are the qualities I bring to my work as a software engineer and a leader, covering a range of
-                skills from full-stack development in Rails, to microservice architecture in Java and Go, devops with
-                Terraform and AWS, and the ability to co-ordinate a team around a project.</p>
-        </section>
+        <p>
+          These are the qualities I bring to my work not only as a software
+          engineer who covers the whole stack from infra to frontend to product,
+          but also as a leader or a mentor.
+        </p>
+      </section>
 
-        <hr>
+      <hr />
 
-        <section id="experience">
-            <header>
-                <h2 class="subsection">Experience</h2>
-            </header>
+      <section id="experience">
+        <header>
+          <h2 class="subsection">Experience</h2>
+        </header>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3><a href="https://babylonhealth.com">Babylon Health</a></h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Senior Software Engineer</span>,
-                    <span class="exp-role">Squad Lead</span>
-                </div>
-                <div class="exp-time" data-ongoing>
-                    Feb 2019-<noscript>&hellip;</noscript>
-                </div>
-                <div class="exp-description">
-                    <p>Facilitated the removal of legacy microservices in order to save on infrastructure and
-                        engineering costs.</p>
-                    <p>Leading the effort to migrate/replatform domains originally built in a monolithic codebase
-                        (written in Ruby), into their own microservices (written in Java), maintaining backwards
-                        compatibility with legacy mobile clients.</p>
-                    <p>Planning the migration of data from the legacy services into the relevant microservices' own
-                        databases.</p>
-                </div>
-            </div>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href-"https://hopin.com">Hopin</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Senior Fullstack Engineer</span>
+            <span class="exp-role">Pod Lead</span>
+            <span class="exp-role">Staff Backend Engineer</span>
+          </div>
+          <div class="exp-time" data-ongoing>
+            Aug-2020-<noscript>&hellip;</noscript>
+          </div>
+          <div class="exp-description">
+            <strong>Hopin:</strong>
+            <p>Kicked off and led the task-force that implemented Kafka in the tech stack along with building the schema registry and library support to ease the migration based upon their requirements.
+            </p>
+            <p>Led the approach to refactor legacy frontend code into Typescript with Jest testing</p>
+            <p>Assisted in the provisioning of new infra in Kubernetes and migrating CI/CD from Github to Gitlab</p>
+            <strong>Superwave:</strong>
+            <p>Early stage scale planning for a loosely-defined product</p>
+            <p>Rapid prototype development while considering mid-stage steps</p>
+            <p>Direct interaction and feedback between product, design and engineering on requirements</p>
+            <p>Infrastructure; migrating the stack to reduce costs and engineering effort</p>
+          </div>
+        </div>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3><a href="https://sohohouse.com">Soho House</a></h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Senior Software Engineer (Contract)</span>
-                </div>
-                <div class="exp-time">
-                    Jun-Oct 2018
-                </div>
-                <div class="exp-description">
-                    <p>Planned and implemented SEPA payment integration system for Soho House businesses across the EU.
-                        Involved working with microservices written in plain Ruby, as well as adhering to bank-specific
-                        SOAP-based API specifications.</p>
-                </div>
-            </div>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href="https://babylonhealth.com">Babylon Health</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Senior Software Engineer</span>,
+            <span class="exp-role">Squad Lead</span>
+          </div>
+          <div class="exp-time">Feb 2019-Aug 2020</div>
+          <div class="exp-description">
+            <p>
+              Facilitated the removal of legacy microservices in order to save
+              on infrastructure and engineering costs.
+            </p>
+            <p>
+              Leading the effort to migrate/replatform domains originally built
+              in a monolithic codebase (written in Ruby), into their own
+              microservices (written in Java), maintaining backwards
+              compatibility with legacy mobile clients.
+            </p>
+            <p>
+              Planning the migration of data from the legacy services into the
+              relevant microservices' own databases.
+            </p>
+          </div>
+        </div>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3>Bobtrade</h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Senior Software Engineer (Contract)</span>
-                </div>
-                <div class="exp-time">
-                    Apr-Jun 2018
-                </div>
-                <div class="exp-description">
-                    <p>Development of a machine-learning based e-commerce platorm for the construction industry,
-                        consuming a REST-based API with a single page Javascript app built using React, Redux, server
-                        side rendering and Webpack.</p>
-                </div>
-            </div>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href="https://sohohouse.com">Soho House</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Senior Software Engineer (Contract)</span>
+          </div>
+          <div class="exp-time">Jun-Oct 2018</div>
+          <div class="exp-description">
+            <p>
+              Planned and implemented SEPA payment integration system for Soho
+              House businesses across the EU. Involved working with
+              microservices written in plain Ruby, as well as adhering to
+              bank-specific SOAP-based API specifications.
+            </p>
+          </div>
+        </div>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3><a href="https://fridaypulse.com">Friday Pulse</a></h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Senior Software Engineer</span>,
-                    <span class="exp-role">DevOps Lead</span>
-                </div>
-                <div class="exp-time">
-                    Apr 2017-Apr 2018
-                </div>
-                <div class="exp-description">
-                    <p>Development of a new SaaS-focussed version of an existing product, in the form of a single page
-                        web-app using GraphQL to communicate with the API, as opposed to a traditional RESTful service
-                    </p>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3>Bobtrade</h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Senior Software Engineer (Contract)</span>
+          </div>
+          <div class="exp-time">Apr-Jun 2018</div>
+          <div class="exp-description">
+            <p>
+              Development of a machine-learning based e-commerce platorm for the
+              construction industry, consuming a REST-based API with a single
+              page Javascript app built using React, Redux, server side
+              rendering and Webpack.
+            </p>
+          </div>
+        </div>
 
-                    <p>Ownership of the infrastructure used to host and deploy Friday, including using Terraform to
-                        manage a Docker-based deployment using ECS, S3 for static site hosting, Elasticsearch, RDS, and
-                        CloudFront for the CDN distribution before transitioning to Heroku to reduce overhead.</p>
-                </div>
-            </div>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href="https://fridaypulse.com">Friday Pulse</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Senior Software Engineer</span>,
+            <span class="exp-role">DevOps Lead</span>
+          </div>
+          <div class="exp-time">Apr 2017-Apr 2018</div>
+          <div class="exp-description">
+            <p>
+              Development of a new SaaS-focussed version of an existing product,
+              in the form of a single page web-app using GraphQL to communicate
+              with the API, as opposed to a traditional RESTful service
+            </p>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3><a href="https://typeform.com">Typeform</a></h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Senior Software Engineer</span>,
-                    <span class="exp-role">Tech Lead</span>
-                </div>
-                <div class="exp-time">
-                    Jun 2015-Apr 2017
-                </div>
-                <div class="exp-description">
-                    <p>Kicking off initial process to implement a mentoring system for engineering teams. Inter-team
-                        conflict resolution and collaboration in the role of tech lead.</p>
+            <p>
+              Ownership of the infrastructure used to host and deploy Friday,
+              including using Terraform to manage a Docker-based deployment
+              using ECS, S3 for static site hosting, Elasticsearch, RDS, and
+              CloudFront for the CDN distribution before transitioning to Heroku
+              to reduce overhead.
+            </p>
+          </div>
+        </div>
 
-                    <p>Transitioning from monolothic PHP/Symfony setup to smaller microservices (written in Go)
-                        responsible for handling user accounts, result collection, form building, analytics, and
-                        customer success admin tools.</p>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href="https://typeform.com">Typeform</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Senior Software Engineer</span>,
+            <span class="exp-role">Tech Lead</span>
+          </div>
+          <div class="exp-time">Jun 2015-Apr 2017</div>
+          <div class="exp-description">
+            <p>
+              Kicking off initial process to implement a mentoring system for
+              engineering teams. Inter-team conflict resolution and
+              collaboration in the role of tech lead.
+            </p>
 
-                    <p>Planning and developing tools in collaboration with the Customer Success Department, in order to
-                        improve their ability to support users. Additionally, building tools to improve the development
-                        environment for teams transitioning to microservices.</p>
-                </div>
-            </div>
+            <p>
+              Transitioning from monolothic PHP/Symfony setup to smaller
+              microservices (written in Go) responsible for handling user
+              accounts, result collection, form building, analytics, and
+              customer success admin tools.
+            </p>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3>Meet &amp; Jam</h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Software Engineer (Contract)</span>
-                </div>
-                <div class="exp-time">
-                    Mar-Jun 2015
-                </div>
-                <div class="exp-description">
-                    <p>Helped finish the payment and booking system for studios within the application, integrating with
-                        Stripe, and updating old framework code to use React.</p>
-                </div>
-            </div>
+            <p>
+              Planning and developing tools in collaboration with the Customer
+              Success Department, in order to improve their ability to support
+              users. Additionally, building tools to improve the development
+              environment for teams transitioning to microservices.
+            </p>
+          </div>
+        </div>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3><a href="https://railsgirls.london">Rails Girls London</a></h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Cofounder</span>,
-                    <span class="exp-role">Volunteer Coach</span>
-                </div>
-                <div class="exp-time" data-ongoing>
-                    2013-<noscript>&hellip;</noscript>
-                </div>
-                <div class="exp-description">
-                    <p>Assistance with seeking sponsorship and venue arrangements for workshops and weekly sessions, as
-                        well as reaching out to applicants to offer support.</p>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3>Meet &amp; Jam</h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Software Engineer (Contract)</span>
+          </div>
+          <div class="exp-time">Mar-Jun 2015</div>
+          <div class="exp-description">
+            <p>
+              Helped finish the payment and booking system for studios within
+              the application, integrating with Stripe, and updating old
+              framework code to use React.
+            </p>
+          </div>
+        </div>
 
-                    <p>Assistance in the workshops, coaching pairs of attendants as they build a simple website with
-                        Rails, HTML and CSS over a weekend.</p>
-                </div>
-            </div>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href="https://railsgirls.london">Rails Girls London</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Cofounder</span>,
+            <span class="exp-role">Volunteer Coach</span>
+          </div>
+          <div class="exp-time" data-ongoing>
+            2013-<noscript>&hellip;</noscript>
+          </div>
+          <div class="exp-description">
+            <p>
+              Assistance with seeking sponsorship and venue arrangements for
+              workshops and weekly sessions, as well as reaching out to
+              applicants to offer support.
+            </p>
 
-            <div class="experience-block">
-                <div class="exp-company">
-                    <h3><a href="https://thoughtbot.com/london">New Bamboo</a></h3>
-                </div>
-                <div class="exp-roles">
-                    <span class="exp-role">Software Developer</span>,
-                    <span class="exp-role">Scrum Master</span>
-                </div>
-                <div class="exp-time">
-                    Jun 2012-Feb 2015
-                </div>
-                <div class="exp-description">
-                    <p>Coaching of agile and scrum methodologies to new clients, bringing product owners on board with
-                        the process and working with the team to maximise project success.</p>
+            <p>
+              Assistance in the workshops, coaching pairs of attendants as they
+              build a simple website with Rails, HTML and CSS over a weekend.
+            </p>
+          </div>
+        </div>
 
-                    <p>Building various projects within an agile team, typically based on Ruby on Rails with some
-                        dynamic frontend behaviour.</p>
-                </div>
-            </div>
-        </section>
+        <div class="experience-block">
+          <div class="exp-company">
+            <h3><a href="https://thoughtbot.com/london">New Bamboo</a></h3>
+          </div>
+          <div class="exp-roles">
+            <span class="exp-role">Software Developer</span>,
+            <span class="exp-role">Scrum Master</span>
+          </div>
+          <div class="exp-time">Jun 2012-Feb 2015</div>
+          <div class="exp-description">
+            <p>
+              Coaching of agile and scrum methodologies to new clients, bringing
+              product owners on board with the process and working with the team
+              to maximise project success.
+            </p>
 
-        <hr>
+            <p>
+              Building various projects within an agile team, typically based on
+              Ruby on Rails with some dynamic frontend behaviour.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <section id="references">
-            <header>
-                <h2 class="subsection">References</h2>
-            </header>
+      <hr />
 
-            <p>Available upon request.</p>
-        </section>
+      <section id="references">
+        <header>
+          <h2 class="subsection">References</h2>
+        </header>
+
+        <p>Available upon request.</p>
+      </section>
     </main>
 
     <footer class="container">
-        <header>
-            <h3 class="subsection-end"><small>-UUU:----F1&nbsp;&nbsp;index.html&nbsp;&nbsp;&nbsp;&nbsp;Bot
-                    L301&nbsp;&nbsp;Git:master&nbsp;&nbsp;(HTML+) ----------</small></h3>
-        </header>
-        <small class="meta">
-            🌍: https://www.mrlee.dev | 🚢: https://github.com/mrleedev/cv.mrlee.dev | 💌: cv@mrlee.dev
-        </small>
+      <header>
+        <h3 class="subsection-end">
+          <small
+            >-UUU:----F1&nbsp;&nbsp;index.html&nbsp;&nbsp;&nbsp;&nbsp;Bot
+            L301&nbsp;&nbsp;Git:master&nbsp;&nbsp;(HTML+) ----------</small
+          >
+        </h3>
+      </header>
+      <small class="meta">
+        🌍: https://www.mrlee.dev | 🚢: https://github.com/mrleedev/cv.mrlee.dev
+        | 💌: cv@mrlee.dev
+      </small>
     </footer>
-</body>
-
+  </body>
 </html>
